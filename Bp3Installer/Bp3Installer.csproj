@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Aegis.ico</ApplicationIcon>
+    <Company>Uwu/Darkdoom</Company>
+    <Description>Downloader and extractor for the bp3 addon suite.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Icons\logo_small.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Aegis.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModernUI.WPF" Version="1.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\logo_small.png" />
+  </ItemGroup>
+
+</Project>

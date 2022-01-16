@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Bp3Installer.Pages.MainInstallerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Bp3Installer.Pages"
+             mc:Ignorable="d" Height="247" Width="810">
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="385*"/>
+            <ColumnDefinition Width="393*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas Grid.ColumnSpan="2" Margin="0,0,0,-13">
+            <Canvas Height="216" Width="778">
+                <Label Content="Enter your Windower Path: " Canvas.Left="24" Canvas.Top="32" Width="159"/>
+                <TextBox TextWrapping="Wrap" Text="C:/Users/Dupes/Desktop/Windower4" Margin="164,19,348,68" Canvas.Left="24" Canvas.Top="10" Width="375"/>
+                <Label Content="User Directory Detected: " Canvas.Left="86" Canvas.Top="124" Width="144"/>
+                <Label Name="UserDirectoryDetectedLabel" Content="" Canvas.Left="235" Canvas.Top="124" Background="#FFA21515" Width="17"/>
+                <Label Content="Enter your Windower Path: " Canvas.Left="24" Canvas.Top="32" Width="159"/>
+                <TextBox Name="ProvidedDirectoryTextBox" TextWrapping="Wrap" Text="C:/Users/Dupes/Desktop/Windower4" Margin="164,19,348,68" Canvas.Left="24" Canvas.Top="10" Width="375" ToolTip="This path should be the base directory containing your addon folder and windower executable."/>
+                <Label Content="Existing Installation Detected: " Canvas.Left="60" Canvas.Top="100" Width="184"/>
+                <Label Name="ExistingInstallLabel" Content="" Canvas.Left="235" Canvas.Top="100" Background="#FFA21515" Width="17"/>
+                <Border BorderBrush="#FF3E2A2A" BorderThickness="1" Height="92" Width="539" Canvas.Top="69" Canvas.Left="29"/>
+                <Button x:Name="InstallButton" Content="Install/Update" Margin="372,14,22,21" Canvas.Top="70" Height="62" Width="163" Click="InstallButton_Click"/>
+                <Image Height="76" Canvas.Left="562" Width="162" Canvas.Top="29">
+                    <Image.Source>
+                        <BitmapImage DecodePixelWidth="1900" UriSource="/Icons/logo_small.png" />
+                    </Image.Source>
+                </Image>
+                <ProgressBar x:Name="InstallProgress" Height="10" Width="300" Canvas.Left="29" Canvas.Top="170"/>
+                <Label Name="ProgBarLabel" Content="Ready" Canvas.Left="344" Canvas.Top="167" Width="369"/>
+            </Canvas>
+
+        </Canvas>
+
+    </Grid>
+</UserControl>
