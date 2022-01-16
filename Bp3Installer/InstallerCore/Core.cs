@@ -17,8 +17,6 @@ namespace Bp3Installer.InstallerCore
         private static string _InstallerStep = "Ready";
         private static byte _InstallProgress = 0;
 
-
-
         public static bool DirectoryFound { get { lock (_Lock) { return _DirectoryFound; } } set { lock (_Lock) { _DirectoryFound = value; } } }
         public static bool ArchiveFound { get { lock (_Lock) { return _ArchiveFound; } } set { lock (_Lock) { _ArchiveFound = value; } } }   
         public static bool InstallFinished { get { lock (_Lock) { return _InstallFinished; } } set { lock (_Lock) { _InstallFinished = value; } } }

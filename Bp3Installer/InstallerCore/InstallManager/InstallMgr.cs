@@ -11,7 +11,7 @@ namespace Bp3Installer.InstallerCore.InstallManager
 {
     internal class InstallMgr
     {
-        private static object _Lock = new object();
+
         private static string _AppLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
         private readonly string _AppPath = System.IO.Path.GetDirectoryName(_AppLocation);
         private readonly string _DirectoryToCheck;

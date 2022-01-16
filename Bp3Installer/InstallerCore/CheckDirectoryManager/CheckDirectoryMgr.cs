@@ -9,7 +9,7 @@ namespace Bp3Installer.InstallerCore.CheckDirectoryManager
 {
     internal class CheckDirectoryMgr
     {
-        private string _DirectoryToCheck = "";
+        private readonly string _DirectoryToCheck;
 
         public CheckDirectoryMgr(string dir)
         {
