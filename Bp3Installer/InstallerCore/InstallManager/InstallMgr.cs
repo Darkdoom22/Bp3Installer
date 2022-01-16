@@ -21,56 +21,53 @@ namespace Bp3Installer.InstallerCore.InstallManager
             this._DirectoryToCheck = dir;
         }
 
+        private Task UpdateProgressBar(string msg, byte progress)
+        {
+            Core.InstallerStep = msg;
+            Core.InstallProgress = progress;
+
+            return Task.CompletedTask;
+        }
+
         private async Task<Task> InstallBp3Internal()
         {
-            InstallerCore.Core.InstallerStep = "Verifying user directory..";
-            InstallerCore.Core.InstallProgress = 5;
+
+            await this.UpdateProgressBar("Verifying user directory..", 5);
 
             if (Core.DirectoryFound)
             {
-                InstallerCore.Core.InstallerStep = "Directory verified!";
-                InstallerCore.Core.InstallProgress = 10;
 
-                InstallerCore.Core.InstallerStep = "Instantiating archive manager..";
-                InstallerCore.Core.InstallProgress = 15;
-                InstallerCore.ArchiveManager.ArchiveMgr archiveMgr = new();
+                await this.UpdateProgressBar("Directory verified!", 10);
 
-                InstallerCore.Core.InstallerStep = "Downloading most recent archive..";
-                InstallerCore.Core.InstallProgress = 20;
+                await this.UpdateProgressBar("Instantiating archive manager..", 15);
+                ArchiveManager.ArchiveMgr archiveMgr = new();
+
+                await this.UpdateProgressBar("Downloading most recent archive..", 20);
                 await archiveMgr.DownloadArchive();
 
-                InstallerCore.Core.InstallerStep = "Verifying archive download..";
-                InstallerCore.Core.InstallProgress = 50;
-
+                await this.UpdateProgressBar("Verifying archive download..", 50);
                 await archiveMgr.CheckForArchive();
 
                 if (Core.ArchiveFound)
                 {
-                    InstallerCore.Core.InstallerStep = "Archive verified, extracting to temp location..";
-                    InstallerCore.Core.InstallProgress = 70;
 
+                    await this.UpdateProgressBar("Archive verified, extracting to temp..", 70);
                     ZipFile.ExtractToDirectory($@"{_AppPath}/bp3.zip", $@"{_AppPath}/temp", true);
 
-                    InstallerCore.Core.InstallerStep = "Preparing file move..";
-                    InstallerCore.Core.InstallProgress = 80;
-
+                    await this.UpdateProgressBar("Preparing file move..", 80);
                     FileSystem.CopyDirectory($@"{_AppPath}/temp/bp3-main", $@"{_AppPath}/temp/bp3", true);
 
-                    InstallerCore.Core.InstallerStep = "Renamed Folder..";
-                    InstallerCore.Core.InstallProgress = 85;
-
+                    await this.UpdateProgressBar("Renamed folder..", 85);
                     FileSystem.CopyDirectory($@"{_AppPath}/temp/bp3", $@"{_DirectoryToCheck}/addons/bp3", true);
 
-                    InstallerCore.Core.InstallerStep = "Move done!";
-                    InstallerCore.Core.InstallProgress = 90;
+                    await this.UpdateProgressBar("Move done!", 90);
 
-                    InstallerCore.Core.InstallerStep = "Cleaning up..";
+                    await this.UpdateProgressBar("Cleaning up..", 90);
                     Directory.Delete($@"{_AppPath}/temp/bp3", true);
                     Directory.Delete($@"{_AppPath}/temp/bp3-main", true);
                     File.Delete($@"{_AppPath}/bp3.zip");
 
-                    InstallerCore.Core.InstallerStep = "Done!";
-                    InstallerCore.Core.InstallProgress = 100;
+                    await this.UpdateProgressBar("Done!", 100);
 
                     return Task.FromResult(Task.CompletedTask);
                 }          
@@ -84,7 +81,6 @@ namespace Bp3Installer.InstallerCore.InstallManager
         {
             return Task.Factory.StartNew(async () => { await InstallBp3Internal(); });
         }
-
 
     }
 }
